@@ -5,10 +5,13 @@ function render(){
     });
     
     const inputSearch = document.querySelector("#search-input");
-    inputSearch.addEventListener("keydown", (event) =>{
-    if(event.keyCode === 13){
+    // inputSearch.addEventListener("keydown", (event) =>{
+    // if(event.keyCode === 13){
+    //     filterEpisodes(inputSearch.value);
+    // }
+    // });
+        inputSearch.addEventListener("keydown", () =>{
         filterEpisodes(inputSearch.value);
-    }
     });
 }
 
@@ -27,11 +30,22 @@ function episodeComponent(element){
 }
 
 function filterEpisodes(input){
+    document.querySelector(".episodes-display").innerHTML = `<article class="episodes-display">
+                    <template class="episode-component">
+                    <h5 class="episode-nb-sn">S01E01</h5>
+                    <img class="episode-img" src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg" alt="episode-image"/>
+                    <h3 class="episode-title margin">Winter is Coming</h3>
+                    <p class="episode-summary margin">Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>
+                    <div class="episode-duration-rate">
+                        <p>62 min</p>
+                        <p>8.91</p>
+                    </div>
+                </template>
+    </article`;
     const allEpisodes = getAllEpisodes();
     console.log(allEpisodes.filter(element => {
-        if(element.name.toUpperCase().includes(input.toUpperCase())){
+        if((element.name.toUpperCase().includes(input.toUpperCase())) || (element.summary.toUpperCase().includes(input.toUpperCase()))){
             const newcomponent = episodeComponent(element);
-            document.querySelector(".episodes-display").innerHTML = `<article class="episodes-display"></article`;
             document.querySelector(".episodes-display").append(newcomponent);
         }
     }));
