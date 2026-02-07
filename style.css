@@ -56,3 +56,9 @@ body{
 .margin {
     margin: 10px;
 }
+
+.season-select-option {
+    
+    background: transparent;
+    color: black;
+}

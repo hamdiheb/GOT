@@ -4,15 +4,19 @@ function render(){
         document.querySelector(".episodes-display").append(episodeComponent(element));
     });
     
+
     const inputSearch = document.querySelector("#search-input");
-    // inputSearch.addEventListener("keydown", (event) =>{
-    // if(event.keyCode === 13){
-    //     filterEpisodes(inputSearch.value);
-    // }
-    // });
-        inputSearch.addEventListener("keydown", () =>{
+    inputSearch.addEventListener("keyup", () =>{
         filterEpisodes(inputSearch.value);
+    }); 
+
+    const select = document.querySelector("select");
+    episodesList = allEpisodes.map(element => {
+        const optionClone = document.querySelector(".season-select-option").cloneNode(true);
+        optionClone.innerText = `${element.name}`;
+        select.append(optionClone);
     });
+
 }
 
 function episodeComponent(element){
@@ -30,7 +34,7 @@ function episodeComponent(element){
 }
 
 function filterEpisodes(input){
-    document.querySelector(".episodes-display").innerHTML = `<article class="episodes-display">
+    document.querySelector(".episodes-display").innerHTML = `
                     <template class="episode-component">
                     <h5 class="episode-nb-sn">S01E01</h5>
                     <img class="episode-img" src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg" alt="episode-image"/>
@@ -41,15 +45,17 @@ function filterEpisodes(input){
                         <p>8.91</p>
                     </div>
                 </template>
-    </article`;
+    `;
     const allEpisodes = getAllEpisodes();
-    console.log(allEpisodes.filter(element => {
+    let count =0;
+    allEpisodes.filter(element => {
         if((element.name.toUpperCase().includes(input.toUpperCase())) || (element.summary.toUpperCase().includes(input.toUpperCase()))){
             const newcomponent = episodeComponent(element);
             document.querySelector(".episodes-display").append(newcomponent);
+            count++;
+            document.querySelector(".episode-numbers") .innerText = `Displaying ${count}/73`;
         }
-    }));
-    
+    });
 }
 
 render();
