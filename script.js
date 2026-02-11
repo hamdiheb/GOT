@@ -27,8 +27,10 @@ export function render(allEpisodes){
 
     
     const select = document.querySelector("#select-season");
+    select.innerHTML = `<select class="search-option" id="select-season"></select>`
     const episodesList = allEpisodes.map(element => {
-        const optionClone = document.querySelector(".season-select-option").cloneNode(true);
+        const optionClone = document.createElement("option");
+        optionClone.classList.add("season-select-option");
         optionClone.innerText = `${element.name}`;
         select.append(optionClone);
     });

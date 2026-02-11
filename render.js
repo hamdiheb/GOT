@@ -25,6 +25,7 @@ export async function main(){
         const {name,id}=element;
         const newShow = document.createElement("option");
         newShow.id = id;
+        newShow.classList.add('show-select-option');
         newShow.innerText = `${name}`;
         selectShows.append(newShow);
     });
