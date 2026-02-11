@@ -5,12 +5,16 @@
     </head>
     <body>
         <section id="main">
+            <p class="rendering">Rendering ...</p>
             <article class="search-component">
                 <div id="episodes-length">
                 <h3>Episodes</h3>
                 <p class="episode-numbers">Displaying 73/73 episodes</p>
                 </div>
                 <div class="episodes-search-options">
+                    <select class="search-option show-select">
+                        <option class="show-select-option">All shows</option>
+                    </select>
                     <select class="search-option" id="select-season">
                         <option class="season-select-option">All Seasons</option>
                     </select>
@@ -36,7 +40,8 @@
                 </template>
             </article>
         </section>
-        <script src="episodes.js"></script>
-        <script src="script.js"></script>
+        <!-- <script src="episodes.js"></script> -->
+        <script type="module" src="render.js"></script>
+        <script type="module" src="script.js"></script>
     </body>
 </html>
