@@ -1,6 +1,7 @@
 import {main} from './render.js';
 
 export function render(allEpisodes){
+        document.querySelector(".episode-numbers") .innerText = `Displaying ${allEpisodes.length} EP`;
         document.querySelector(".episodes-display").innerHTML = `
                     <template class="episode-component">
                     <h5 class="episode-nb-sn">S01E01</h5>
@@ -9,7 +10,7 @@ export function render(allEpisodes){
                     <p class="episode-summary margin">Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>
                     <div class="episode-duration-rate">
                         <p>62 min</p>
-                        <p>8.91</p>
+                        <p><img class="rate-ep" src="./img/star-svgrepo-com.svg"/>8.1</p>
                     </div>
                 </template>
     `;
@@ -48,7 +49,7 @@ function episodeComponent(element){
     componentCloned.content.querySelector("h5").innerText = `S${season.toString().padStart(2,'0')}E${number.toString().padStart(2,'0')}`;
     componentCloned.content.querySelector("img").src = medium;
     componentCloned.content.querySelector("h3").innerText = `${name}`;
-    componentCloned.content.querySelector("p").innerHtml = summary;
+    componentCloned.content.querySelector(".episode-summary").innerHTML = element.summary;
     const newArticle = document.createElement("div");
     newArticle.classList.add("episode-component");
     newArticle.append(componentCloned.content);
@@ -74,7 +75,7 @@ function filterEpisodes(allEpisodes,input){
             const newcomponent = episodeComponent(element);
             document.querySelector(".episodes-display").append(newcomponent);
             count++;
-            document.querySelector(".episode-numbers") .innerText = `Displaying ${count}/73`;
+            document.querySelector(".episode-numbers") .innerText = `Displaying ${count}/${allEpisodes.length}`;
         }
     });
 }
