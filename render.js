@@ -17,10 +17,8 @@ async function apiFetchEps(showID){
     }
 }
 
-export async function main(){
-    const allshows= await apifetchShow();
+function addshowsSelector(allshows){
     const selectShows = document.querySelector(".show-select");
-
     allshows.map(element => {
         const {name,id}=element;
         const newShow = document.createElement("option");
@@ -29,7 +27,10 @@ export async function main(){
         newShow.innerText = `${name}`;
         selectShows.append(newShow);
     });
-
+}
+export async function main(){
+    const allshows= await apifetchShow();
+    addshowsSelector(allshows);
     let showID =1;
     const allEpisodes=await apiFetchEps(showID);
     render(allEpisodes);

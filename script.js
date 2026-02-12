@@ -1,19 +1,8 @@
 import {main} from './render.js';
 
 export function render(allEpisodes){
-        document.querySelector(".episode-numbers") .innerText = `Displaying ${allEpisodes.length} EP`;
-        document.querySelector(".episodes-display").innerHTML = `
-                    <template class="episode-component">
-                    <h5 class="episode-nb-sn">S01E01</h5>
-                    <img class="episode-img" src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg" alt="episode-image"/>
-                    <h3 class="episode-title margin">Winter is Coming</h3>
-                    <p class="episode-summary margin">Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>
-                    <div class="episode-duration-rate">
-                        <p>62 min</p>
-                        <p><img class="rate-ep" src="./img/star-svgrepo-com.svg"/>8.1</p>
-                    </div>
-                </template>
-    `;
+        document.querySelector(".episode-numbers") .innerText = `Displaying ${allEpisodes.length} EP`; // Render Dynamic Data about episodes
+        document.querySelector(".episodes-display").innerHTML = cleanDisplay();
     function renderAll(){
         allEpisodes.map(element => {
         document.querySelector(".episodes-display").append(episodeComponent(element));
@@ -57,18 +46,7 @@ function episodeComponent(element){
 }
 
 function filterEpisodes(allEpisodes,input){
-    document.querySelector(".episodes-display").innerHTML = `
-                    <template class="episode-component">
-                    <h5 class="episode-nb-sn">S01E01</h5>
-                    <img class="episode-img" src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg" alt="episode-image"/>
-                    <h3 class="episode-title margin">Winter is Coming</h3>
-                    <p class="episode-summary margin">Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>
-                    <div class="episode-duration-rate">
-                        <p>62 min</p>
-                        <p>8.91</p>
-                    </div>
-                </template>
-    `;
+    document.querySelector(".episodes-display").innerHTML = cleanDisplay();
     let count =0;
     allEpisodes.filter(element => {
         if((element.name.toUpperCase().includes(input.toUpperCase())) || (element.summary.toUpperCase().includes(input.toUpperCase()))){
@@ -79,5 +57,18 @@ function filterEpisodes(allEpisodes,input){
         }
     });
 }
- 
+
+function cleanDisplay(){
+    return                     `<template class="episode-component">
+                    <h5 class="episode-nb-sn">S01E01</h5>
+                    <img class="episode-img" src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg" alt="episode-image"/>
+                    <h3 class="episode-title margin">Winter is Coming</h3>
+                    <p class="episode-summary margin">Lord Eddard Stark, ruler of the North, is summoned to court by his old friend, King Robert Baratheon, to serve as the King's Hand. Eddard reluctantly agrees after learning of a possible threat to the King's life. Eddard's bastard son Jon Snow must make a painful decision about his own future, while in the distant east Viserys Targaryen plots to reclaim his father's throne, usurped by Robert, by selling his sister in marriage.</p>
+                    <div class="episode-duration-rate">
+                        <p>62 min</p>
+                        <p><img class="rate-ep" src="./img/star-svgrepo-com.svg"/>8.1</p>
+                    </div>
+                </template>
+    `;
+}
 main();
